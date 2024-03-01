@@ -1,12 +1,12 @@
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
-const UserModel = require('../model/user.model')
+const UserModel = require('./user.model')
 
 const db = require('../config/db');
 
 const { Schema } = mongoose;
 
-const todoSchema = new Schema({
+const eventSchema = new Schema({
     "image": {
         "type": "array",
         "items": {
@@ -48,6 +48,6 @@ const todoSchema = new Schema({
     }
 );
 
-const ToDoModel = db.model('todo',todoSchema);
+const EventModel = db.model('event',eventSchema);
 
-module.exports = ToDoModel;
+module.exports = EventModel;

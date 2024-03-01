@@ -1,8 +1,9 @@
 const app = require('./app');
 const db = require('./config/db')
 const UserModel = require('./model/user.model')
-const ToDoModel = require('./model/todo.model')
 const UserControlModel = require('./model/userControl.model')
+const EventModel = require('./model/event.model')
+const ClubModel = require('./model/club.model')
 
 const port = 3000;
 
