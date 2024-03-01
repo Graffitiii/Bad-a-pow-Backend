@@ -6,7 +6,7 @@ exports.createEvent = async (req,res,next)=>{
 
         let create = await EventServices.createEvent(image,club,contact,eventdate,level,brand,price_badminton,priceplay,details);
 
-        res.json({status:true,success:create});
+        res.json({status:true,eventlistdata:create});
     } catch (error) {
         // throw err;
         res.json({status:false,success:'Error'})
