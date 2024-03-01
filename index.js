@@ -1,6 +1,7 @@
 const app = require('./app');
 const db = require('./config/db')
 const UserModel = require('./model/user.model')
+const UserControlModel = require('./model/userControl.model')
 const EventModel = require('./model/event.model')
 const ClubModel = require('./model/club.model')
 
