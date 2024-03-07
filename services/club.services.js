@@ -9,6 +9,16 @@ class ClubServices{
 
         
     }
+
+    static async getClubList(){
+        try{
+            return await ClubModel.find();
+        }catch(error){
+            throw error;
+        }
+        
+
+    }
 }
 
 module.exports = ClubServices;
