@@ -26,3 +26,18 @@ exports.getClub = async (req,res,next)=>{
         res.json({status:false,success:'Error'})
     }
 }
+
+exports.getClubList = async (req,res,next)=>{
+    try {
+        const {} = req.body;
+
+        let get = await ClubServices.getClubList();
+
+        res.json({status:true,success:get});
+    } catch (error) {
+        throw err;
+        // res.json({status:false,success:'Error'})
+    }
+
+
+}

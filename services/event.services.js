@@ -1,10 +1,21 @@
 const { json } = require('body-parser');
 const EventModel = require('../model/event.model');
+const ClubModel = require('../model/club.model');
 
 class EventServices{
     static async createEvent(image,club,contact,eventdate,level,brand,price_badminton,priceplay,details){
 
         const createEvent = new EventModel({image,club,contact,eventdate,level,brand,price_badminton,priceplay,details});
+        try {
+            // console.log(createEvent);
+            await ClubModel.updateOne(
+                { clubname: club },
+                { $addToSet: {event_id : createEvent._id.toString() } }
+            )
+        }
+        catch (error) {
+            // res.json({status:false,success:'Error'})
+        }
         return await createEvent.save();
 
     }
