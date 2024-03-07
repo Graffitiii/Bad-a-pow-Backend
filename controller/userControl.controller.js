@@ -13,3 +13,15 @@ exports.createUserControl = async (req,res,next)=>{
     }
 }
 
+exports.addFollowClub = async (req,res,next)=>{
+    try {
+        const {userName,clubId} = req.body;
+
+        let userControl = await UserControlServices.addFollowClub(userName,clubId);
+        res.json({status:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+

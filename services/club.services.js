@@ -9,6 +9,11 @@ class ClubServices{
 
         
     }
+
+    static async getClub(clubname){
+        const getClub = ClubModel.findOne({clubname:clubname});
+        return await getClub;
+    }
 }
 
 module.exports = ClubServices;

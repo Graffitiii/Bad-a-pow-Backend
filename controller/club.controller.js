@@ -12,3 +12,17 @@ exports.createClub = async (req,res,next)=>{
         res.json({status:false,success:'Error'})
     }
 }
+
+exports.getClub = async (req,res,next)=>{
+    try {
+        // const {clubname} = req.body;
+        const clubname = req.query.clubname;
+
+        let club = await ClubServices.getClub(clubname);
+
+        res.json({status:true,club:club});
+    } catch (error) {
+        // throw err;
+        res.json({status:false,success:'Error'})
+    }
+}
