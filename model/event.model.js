@@ -22,7 +22,10 @@ const eventSchema = new Schema({
         type: String,
         require: true,
     },
-    eventdate:{
+    eventdate_start:{
+        type: Date,
+    },
+    eventdate_end:{
         type: Date,
     },
     level:{
