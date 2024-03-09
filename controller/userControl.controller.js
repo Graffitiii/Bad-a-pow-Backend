@@ -25,3 +25,28 @@ exports.addFollowClub = async (req,res,next)=>{
     }
 }
 
+exports.unFollowClub = async (req,res,next)=>{
+    try {
+        const {userName,clubId} = req.body;
+
+        let userControl = await UserControlServices.unFollowClub(userName,clubId);
+        res.json({delete:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+
+exports.registerOwner = async (req,res,next)=>{
+    try {
+        const {userName} = req.body;
+
+        let userControl = await UserControlServices.registerOwner(userName);
+        // console.log(userControl)
+        res.json({status:true});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+

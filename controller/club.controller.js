@@ -1,4 +1,5 @@
 const ClubServices = require('../services/club.services');
+const UserControlServices = require('../services/userControl.services');
 
 exports.createClub = async (req,res,next)=>{
     try {
@@ -40,4 +41,32 @@ exports.getClubList = async (req,res,next)=>{
     }
 
 
+}
+
+exports.getFollowClub = async (req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let get = await UserControlServices.getFollowClubId(userName);
+
+        let followIdList = get.follow
+
+        let result =  await ClubServices.getFollowClubList(followIdList);
+        
+        res.json({status:true,data:result});
+    } catch (error) {
+        
+    }
+}
+
+exports.getOwnerClubList = async (req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let result = await ClubServices.getOwnerClubList(userName);
+
+        res.json({status:true,data:result});
+    } catch (error) {
+        
+    }
 }
