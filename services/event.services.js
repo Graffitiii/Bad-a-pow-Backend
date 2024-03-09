@@ -3,9 +3,9 @@ const EventModel = require('../model/event.model');
 const ClubModel = require('../model/club.model');
 
 class EventServices{
-    static async createEvent(image,club,contact,eventdate,level,brand,price_badminton,priceplay,details){
+    static async createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details){
 
-        const createEvent = new EventModel({image,club,contact,eventdate,level,brand,price_badminton,priceplay,details});
+        const createEvent = new EventModel({image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details});
         try {
             // console.log(createEvent);
             await ClubModel.updateOne(
