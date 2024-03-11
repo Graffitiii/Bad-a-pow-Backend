@@ -58,6 +58,15 @@ class UserControlServices {
 
         // return await registerOwner;
     }
+
+    static async getUserControl(userName){
+        try {
+            const userControl = UserControlModel.findOne({userName: userName})
+            return await userControl;
+        } catch (error) {
+            
+        }
+    }
 }
 
 module.exports = UserControlServices;

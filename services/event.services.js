@@ -63,6 +63,18 @@ class EventServices{
         console.log(id);
         return deleted;
     }
+
+    static async getOwnEventList(ownIdList){
+        try{
+            return await EventModel.find({ 
+                _id: {
+                    $in: ownIdList
+                }
+            });
+        }catch(error){
+            throw error;
+        }
+    }
 }
 
 module.exports = EventServices;

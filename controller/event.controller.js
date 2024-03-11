@@ -68,3 +68,15 @@ exports.deleteEvent = async (req, res, next) => {
         throw error; // ใช้ throw error แทนที่จะใช้ throw err
     }
 }
+
+exports.getOwnEventList = async (req,res,next)=>{
+    try {
+        const ownIdList = req.query.ownIdList;
+
+        let result =  await EventServices.getOwnEventList(ownIdList);
+        
+        res.json({status:true,data:result});
+    } catch (error) {
+        
+    }
+}

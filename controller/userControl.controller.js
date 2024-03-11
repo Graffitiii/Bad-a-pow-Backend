@@ -50,3 +50,15 @@ exports.registerOwner = async (req,res,next)=>{
     }
 }
 
+exports.getUserControl = async (req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let result = await UserControlServices.getUserControl(userName);
+
+        res.json({status:true,data:result});
+    } catch (error) {
+        throw error;
+    }
+}
+

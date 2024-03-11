@@ -9,4 +9,6 @@ router.put('/putEvent/:id',EventController.putEventList);
 
 router.delete('/deleteEvent',EventController.deleteEvent);
 
+router.get('/getOwnEvent',EventController.getOwnEventList);
+
 module.exports = router;
