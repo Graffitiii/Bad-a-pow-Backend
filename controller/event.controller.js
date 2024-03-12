@@ -77,6 +77,29 @@ exports.getOwnEventList = async (req,res,next)=>{
         
         res.json({status:true,data:result});
     } catch (error) {
+        throw error;
+    }
+}
+
+exports.putEventStatus = async (req,res,next)=>{
+    try {
+        const { eventId,status } = req.body;
+        let result =  await EventServices.putEventStatus(eventId,status);
+        
+        res.json({edit:true,data:result});
+    } catch (error) {
+        throw error;
+    }
+}
+
+exports.getEventDetail = async (req,res,next)=>{
+    try {
+        const eventId = req.query.id;
+
+        let result =  await EventServices.getEventDetail(eventId);
+        
+        res.json({status:true,data:result});
+    } catch (error) {
         
     }
 }

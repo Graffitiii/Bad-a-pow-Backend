@@ -23,6 +23,18 @@ const userSchema = new Schema({
         type: String,
         require: true,
         unique: true
+    },
+    picture:{
+        type: String
+    },
+    gender:{
+        type: String
+    },
+    level:{
+        type: String
+    },
+    about:{
+        type: String
     }
     }
 );

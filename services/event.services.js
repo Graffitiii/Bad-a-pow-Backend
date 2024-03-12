@@ -75,6 +75,25 @@ class EventServices{
             throw error;
         }
     }
+
+    static async putEventStatus(eventId,status){
+        try {
+            return await EventModel.findOneAndUpdate({ _id: eventId },
+                {
+                    $set: { active: !status }
+                });
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    static async getEventDetail(eventId){
+        try {
+            return await EventModel.findOne({ _id: eventId });
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = EventServices;

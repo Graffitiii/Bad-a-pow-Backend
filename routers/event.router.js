@@ -11,4 +11,8 @@ router.delete('/deleteEvent',EventController.deleteEvent);
 
 router.get('/getOwnEvent',EventController.getOwnEventList);
 
+router.put('/putEventStatus',EventController.putEventStatus);
+
+router.get('/getEventDetail',EventController.getEventDetail);
+
 module.exports = router;
