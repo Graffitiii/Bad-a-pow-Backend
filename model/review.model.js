@@ -21,6 +21,10 @@ const reviewSchema = new Schema({
         type: String,
         require: true,
     },
+    clubname:{
+        type: String,
+    },
+
     }
 );
 

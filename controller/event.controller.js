@@ -2,9 +2,9 @@ const EventServices = require('../services/event.services');
 
 exports.createEvent = async (req,res,next)=>{
     try {
-        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details} = req.body;
+        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active} = req.body;
 
-        let create = await EventServices.createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details);
+        let create = await EventServices.createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active);
 
         res.json({status:true,eventlistdata:create});
 
