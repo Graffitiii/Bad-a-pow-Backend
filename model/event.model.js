@@ -48,6 +48,9 @@ const eventSchema = new Schema({
     details:{
         type: String,
     },
+    active:{
+        type: Boolean,
+    },
     }
 );
 
