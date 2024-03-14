@@ -1,6 +1,7 @@
 const { json } = require('body-parser');
 const UserControlModel = require('../model/userControl.model');
-const ClubModel = require('../model/club.model')
+const ClubModel = require('../model/club.model');
+const EventModel = require('../model/event.model')
 
 class UserControlServices {
     static async createUserControl(userName, ownerPermission, adminOf, ownerOf, follow, pending, join) {
@@ -66,6 +67,42 @@ class UserControlServices {
         } catch (error) {
             
         }
+    }
+
+    static async sendRequest(userName, event_id) {
+        try {
+            await UserControlModel.updateOne(
+                { userName: userName },
+                { $addToSet: { pending: event_id } }
+            )
+
+            await EventModel.updateOne(
+                { _id: event_id },
+                { $addToSet: { pending: userName } }
+            )
+        }
+        catch (error) {
+            throw error;
+        }
+
+    }
+
+    static async unRequest(userName, event_id) {
+        try {
+            await UserControlModel.updateOne(
+                { userName: userName },
+                { $pull: { pending: event_id } }
+            )
+
+            await EventModel.updateOne(
+                { _id: event_id },
+                { $pull: { pending: userName } }
+            )
+        }
+        catch (error) {
+            throw error;
+        }
+
     }
 }
 

@@ -51,6 +51,18 @@ const eventSchema = new Schema({
     active:{
         type: Boolean,
     },
+    "pending": {
+        "type": "array",
+        "items": {
+            "type": "string",
+        } 
+    },
+    "join": {
+        "type": "array",
+        "items": {
+            "type": "string",
+        } 
+    },
     }
 );
 

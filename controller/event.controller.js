@@ -2,9 +2,9 @@ const EventServices = require('../services/event.services');
 
 exports.createEvent = async (req,res,next)=>{
     try {
-        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active} = req.body;
+        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join} = req.body;
 
-        let create = await EventServices.createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active);
+        let create = await EventServices.createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join);
 
         res.json({status:true,eventlistdata:create});
 
@@ -97,6 +97,37 @@ exports.getEventDetail = async (req,res,next)=>{
         const eventId = req.query.id;
 
         let result =  await EventServices.getEventDetail(eventId);
+        
+        res.json({status:true,data:result});
+    } catch (error) {
+        
+    }
+}
+
+exports.getFilter = async (req,res,next)=>{
+    try {
+        const level = req.query.level;
+
+        let get = await EventServices.getFilter(level);
+
+        res.json({status:true,success:get});
+    } catch (error) {
+        throw err;
+        // res.json({status:false,success:'Error'})
+    }
+
+
+}
+
+exports.getPendingEvent = async (req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let get = await UserControlServices.getPendingEvent(userName);
+
+        let pendding = get.pending
+
+        let result =  await EventServices.getPendingEvent(pendding);
         
         res.json({status:true,data:result});
     } catch (error) {
