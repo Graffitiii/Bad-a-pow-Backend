@@ -9,9 +9,9 @@ class ReviewServices{
         return await createReview.save();
     }
 
-    static async getReviewList(){
+    static async getReviewList(clubname){
         try{
-            return await ReviewModel.find();
+            return await ReviewModel.find({clubname: clubname});
         }catch(error){
             throw error;
         }
@@ -19,23 +19,7 @@ class ReviewServices{
 
     }
 
-    static async getReviewClub(userName){
-        try {
-            const reviewClub = ReviewModel.findOne({userName: userName})
-            return await reviewClub;
-        } catch (error) {
-            
-        }
-    }
-
-    static async getReviewEvent(userName){
-        try {
-            const reviewEvent = ReviewModel.findOne({userName: userName})
-            return await reviewEvent;
-        } catch (error) {
-            
-        }
-    }
+    
 }
 
 module.exports = ReviewServices;

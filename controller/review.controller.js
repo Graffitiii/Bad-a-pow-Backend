@@ -17,9 +17,9 @@ exports.createReview = async (req,res,next)=>{
 
 exports.getReviewList = async (req,res,next)=>{
     try {
-        const {} = req.body;
+        const clubname = req.query.clubname;
 
-        let get = await ReviewServices.getReviewList();
+        let get = await ReviewServices.getReviewList(clubname);
 
         res.json({status:true,success:get});
     } catch (error) {
@@ -30,26 +30,3 @@ exports.getReviewList = async (req,res,next)=>{
 
 }
 
-exports.getReviewClub = async (req,res,next)=>{
-    try {
-        const userName = req.query.userName;
-
-        let result = await ReviewServices.getReviewClub(userName);
-
-        res.json({status:true,data:result});
-    } catch (error) {
-        throw error;
-    }
-}
-
-exports.getReviewEvent = async (req,res,next)=>{
-    try {
-        const userName = req.query.userName;
-
-        let result = await ReviewServices.getReviewEvent(userName);
-
-        res.json({status:true,data:result});
-    } catch (error) {
-        throw error;
-    }
-}

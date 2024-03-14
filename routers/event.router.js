@@ -15,4 +15,8 @@ router.put('/putEventStatus',EventController.putEventStatus);
 
 router.get('/getEventDetail',EventController.getEventDetail);
 
+router.get('/getFilter',EventController.getFilter);
+
+
+
 module.exports = router;

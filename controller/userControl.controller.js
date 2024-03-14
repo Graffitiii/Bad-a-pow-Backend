@@ -62,3 +62,26 @@ exports.getUserControl = async (req,res,next)=>{
     }
 }
 
+exports.sendRequest = async (req,res,next)=>{
+    try {
+        const {userName,event_id} = req.body;
+
+        let userControl = await UserControlServices.sendRequest(userName,event_id);
+        res.json({status:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+
+exports.unRequest = async (req,res,next)=>{
+    try {
+        const {userName,event_id} = req.body;
+
+        let userControl = await UserControlServices.unRequest(userName,event_id);
+        res.json({delete:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}

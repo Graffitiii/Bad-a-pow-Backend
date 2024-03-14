@@ -3,9 +3,9 @@ const EventModel = require('../model/event.model');
 const ClubModel = require('../model/club.model');
 
 class EventServices{
-    static async createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active){
+    static async createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join){
 
-        const createEvent = new EventModel({image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active});
+        const createEvent = new EventModel({image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join});
         try {
             // console.log(createEvent);
             await ClubModel.updateOne(
@@ -94,6 +94,19 @@ class EventServices{
             throw error;
         }
     }
+
+
+    static async getFilter(level){
+        try{
+            return await EventModel.find({level:level});
+        }catch(error){
+            throw error;
+        }
+        
+
+    }
+
+   
 }
 
 module.exports = EventServices;
