@@ -4,9 +4,9 @@ const bcrypt = require("bcrypt");
 
 exports.register = async(req,res,next)=>{
     try{
-        const {phonenumber,password,birthDate,userName} = req.body;
+        const {phonenumber,password,birthDate,userName,picture,gender,level,about,ageShow} = req.body;
 
-        const successRes = await UserService.registerUser(phonenumber,password,birthDate,userName);
+        const successRes = await UserService.registerUser(phonenumber,password,birthDate,userName,picture,gender,level,about,ageShow);
 
         res.json({status:true,success:'User Registered'})
     }
@@ -52,5 +52,17 @@ exports.login = async(req,res,next)=>{
         }
         // res.status(401).json({status:false,success:'Error'})
         // throw error;
+    }
+}
+
+exports.getUser = async(req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let result =  await UserService.getUser(userName);
+        
+        res.json({status:true,data:result});
+    } catch (error) {
+        throw error;
     }
 }

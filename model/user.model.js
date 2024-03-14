@@ -35,6 +35,9 @@ const userSchema = new Schema({
     },
     about:{
         type: String
+    },
+    ageShow:{
+        type: Boolean
     }
     }
 );
