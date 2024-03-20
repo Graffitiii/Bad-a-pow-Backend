@@ -85,3 +85,28 @@ exports.unRequest = async (req,res,next)=>{
         // res.json({status:false,success:'Error'})
     }
 }
+
+exports.joinEvent = async (req,res,next)=>{
+    try {
+        const {userName,event_id} = req.body;
+
+        let userControl = await UserControlServices.joinEvent(userName,event_id);
+        res.json({status:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+
+exports.unJoinEvent = async (req,res,next)=>{
+    try {
+        const {userName,event_id} = req.body;
+
+        let userControl = await UserControlServices.unRequest(userName,event_id);
+        res.json({delete:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+
