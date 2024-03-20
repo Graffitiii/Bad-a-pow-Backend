@@ -32,6 +32,15 @@ class UserService{
             throw error;
         }
     }
+
+    static async editProfile(userName,picture,gender,level,about,ageShow){
+        try {
+            console.log(userName , picture,gender,level,about,ageShow);
+           return await UserModel.findOneAndUpdate({userName : userName},{$set :{picture : picture,gender:gender,level: level,about:about,ageShow:ageShow}})
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = UserService;

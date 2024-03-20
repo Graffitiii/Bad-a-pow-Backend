@@ -66,3 +66,15 @@ exports.getUser = async(req,res,next)=>{
         throw error;
     }
 }
+
+exports.editProfile = async(req,res,next)=>{
+    try {
+        const {userName,picture,gender,level,about,ageShow} = req.body;
+
+        let result =  await UserService.editProfile(userName,picture,gender,level,about,ageShow);
+
+        res.json({status:true,data:result});
+    } catch (error) {
+        
+    }
+}
