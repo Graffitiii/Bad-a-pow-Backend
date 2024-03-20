@@ -104,6 +104,47 @@ class UserControlServices {
         }
 
     }
+
+    static async joinEvent(userName, event_id) {
+        try {
+            await UserControlModel.updateOne(
+                { userName: userName },
+                { $addToSet: { join: event_id } }
+            )
+
+            await EventModel.updateOne(
+                { _id: event_id },
+                { $addToSet: { join: userName } }
+            )
+        }
+        catch (error) {
+            throw error;
+        }
+
+    }
+
+    static async unJoinEvent(userName, event_id) {
+        try {
+            await UserControlModel.updateOne(
+                { userName: userName },
+                { $pull: { join: event_id } }
+            )
+
+            await EventModel.updateOne(
+                { _id: event_id },
+                { $pull: { join: userName } }
+            )
+        }
+        catch (error) {
+            throw error;
+        }
+
+    }
+
+    static async getStatusId(userName) {
+        const getStatusId = UserControlModel.findOne({ userName: userName });
+        return await getStatusId;
+    }
 }
 
 module.exports = UserControlServices;

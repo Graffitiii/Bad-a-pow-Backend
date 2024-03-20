@@ -9,4 +9,7 @@ router.get('/getUserControl',UserControlController.getUserControl);
 router.post('/requestJoinEvent',UserControlController.sendRequest);
 router.delete('/unRequestEvent',UserControlController.unRequest);
 
+router.post('/joinEvent',UserControlController.joinEvent);
+router.delete('/unJoinEvent',UserControlController.unJoinEvent);
+
 module.exports = router;

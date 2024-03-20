@@ -106,6 +106,18 @@ class EventServices{
 
     }
 
+    static async getStatusEvent(eventidList){
+        try{
+            return await EventModel.find({ 
+                _id: {
+                    $in: eventidList
+                }
+            });
+        }catch(error){
+            throw error;
+        }
+    }
+
    
 }
 

@@ -1,4 +1,5 @@
 const EventServices = require('../services/event.services');
+const UserControlServices = require('../services/userControl.services');
 
 exports.createEvent = async (req,res,next)=>{
     try {
@@ -123,14 +124,30 @@ exports.getPendingEvent = async (req,res,next)=>{
     try {
         const userName = req.query.userName;
 
-        let get = await UserControlServices.getPendingEvent(userName);
+        let get = await UserControlServices.getStatusId(userName);
 
-        let pendding = get.pending
+        let penddingIdList = get.pending
 
-        let result =  await EventServices.getPendingEvent(pendding);
+        let result =  await EventServices.getStatusEvent(penddingIdList);
         
         res.json({status:true,data:result});
     } catch (error) {
+        console.log("dwadw");
+    }
+}
+
+exports.getJoinEvent = async (req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let get = await UserControlServices.getStatusId(userName);
+
+        let joinIdList = get.join
+
+        let result =  await EventServices.getStatusEvent(joinIdList);
         
+        res.json({status:true,data:result});
+    } catch (error) {
+        console.log("torew[re");
     }
 }
