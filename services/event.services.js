@@ -96,9 +96,10 @@ class EventServices{
     }
 
 
-    static async getFilter(level){
+    static async getFilter(level,sdate){
         try{
-            return await EventModel.find({level:level});
+           
+            return await EventModel.find({level:level,eventdate_start:sdate});
         }catch(error){
             throw error;
         }
