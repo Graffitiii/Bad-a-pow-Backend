@@ -6,6 +6,11 @@ class ClubServices{
     static async createClub(owner,follower,clubname,admin,event_id){
 
         const createClub = new ClubModel({owner,follower,clubname,admin,event_id});
+        await UserControlModel.updateOne(
+            { 
+                userName: owner },
+            { $addToSet: {ownerOf : createClub._id.toString() } }
+        )
         return await createClub.save();
 
         
@@ -24,7 +29,7 @@ class ClubServices{
         }
     }
 
-    static async getFollowClubList(followIdList){
+    static async getClubById(followIdList){
         try{
             return await ClubModel.find({ 
                 _id: {
@@ -36,15 +41,6 @@ class ClubServices{
         }
     }
 
-    static async getOwnerClubList(userName){
-        try{
-            return await ClubModel.find(
-                {owner:userName}
-            );
-        }catch(error){
-            throw error;
-        }
-    }
 
    
     

@@ -46,9 +46,9 @@ class UserControlServices {
 
     }
 
-    static async getFollowClubId(userName) {
-        const getFollowClubId = UserControlModel.findOne({ userName: userName });
-        return await getFollowClubId;
+    static async getUserControl(userName) {
+        const getUserControl = UserControlModel.findOne({ userName: userName });
+        return await getUserControl;
     }
 
     static async registerOwner(userName) {
