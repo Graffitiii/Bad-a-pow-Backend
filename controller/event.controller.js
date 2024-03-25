@@ -105,11 +105,14 @@ exports.getEventDetail = async (req,res,next)=>{
     }
 }
 
+
 exports.getFilter = async (req,res,next)=>{
     try {
         const level = req.query.level;
+        const sdate = req.query.eventdate_start;
+        
 
-        let get = await EventServices.getFilter(level);
+        let get = await EventServices.getFilter(level,sdate);
 
         res.json({status:true,success:get});
     } catch (error) {
