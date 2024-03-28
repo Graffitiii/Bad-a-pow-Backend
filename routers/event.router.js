@@ -18,7 +18,9 @@ router.get('/getEventDetail',EventController.getEventDetail);
 router.get('/getFilter',EventController.getFilter);
 
 router.get('/getPendingEvent',EventController.getPendingEvent);
-router.get('/getJoinEvent',EventController.getJoinEvent)
+router.get('/getJoinEvent',EventController.getJoinEvent);
+
+router.put('/editEvent',EventController.editEvent);
 
 
 
