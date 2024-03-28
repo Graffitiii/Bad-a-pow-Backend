@@ -116,8 +116,8 @@ exports.getFilter = async (req,res,next)=>{
 
         res.json({status:true,success:get});
     } catch (error) {
-        throw err;
-        // res.json({status:false,success:'Error'})
+        
+        res.json({status:false,success:'Error'})
     }
 
 
@@ -152,5 +152,17 @@ exports.getJoinEvent = async (req,res,next)=>{
         res.json({status:true,data:result});
     } catch (error) {
         console.log("torew[re");
+    }
+}
+
+exports.editEvent = async(req,res,next)=>{
+    try {
+        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details} = req.body;
+
+        let result =  await EventServices.editEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details);
+
+        res.json({status:true,data:result});
+    } catch (error) {
+        
     }
 }

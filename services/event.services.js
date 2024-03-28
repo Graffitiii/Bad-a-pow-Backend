@@ -101,7 +101,7 @@ class EventServices{
            
             return await EventModel.find({level:level,eventdate_start:sdate});
         }catch(error){
-            throw error;
+            res.json({status:false,success:'Error'})
         }
         
 
@@ -115,6 +115,15 @@ class EventServices{
                 }
             });
         }catch(error){
+            throw error;
+        }
+    }
+
+    static async editEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details){
+        try {
+            // console.log(userName , picture,gender,level,about,ageShow);
+           return await EventModel.findOneAndUpdate({club : club},{$set :{image : image,contact:contact,eventdate_start: eventdate_start,eventdate_end:eventdate_end,level:level,brand:brand,price_badminton:price_badminton,priceplay:priceplay,details:details}})
+        } catch (error) {
             throw error;
         }
     }
