@@ -3,9 +3,9 @@ const UserControlServices = require('../services/userControl.services');
 
 exports.createEvent = async (req,res,next)=>{
     try {
-        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join} = req.body;
+        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join,placename,latitude,longitude,userlimit} = req.body;
 
-        let create = await EventServices.createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join);
+        let create = await EventServices.createEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,active,pending,join,placename,latitude,longitude,userlimit);
 
         res.json({status:true,eventlistdata:create});
 
@@ -21,6 +21,8 @@ exports.getEventList = async (req,res,next)=>{
         const {} = req.body;
 
         let get = await EventServices.getEventList();
+
+        console.log(get);
 
         res.json({status:true,eventlistdata:get});
     } catch (error) {

@@ -63,6 +63,18 @@ const eventSchema = new Schema({
             "type": "string",
         } 
     },
+    placename:{
+        type: String,
+    },
+    latitude:{
+        type: Number
+    },
+    longitude:{
+        type: Number
+    },
+    userlimit:{
+        type: Number
+    }
     }
 );
 
