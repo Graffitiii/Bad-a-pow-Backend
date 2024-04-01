@@ -22,7 +22,7 @@ exports.getEventList = async (req,res,next)=>{
 
         let get = await EventServices.getEventList();
 
-        console.log(get);
+        // console.log(get);
 
         res.json({status:true,eventlistdata:get});
     } catch (error) {
@@ -112,9 +112,10 @@ exports.getFilter = async (req,res,next)=>{
     try {
         const level = req.query.level;
         const sdate = req.query.eventdate_start;
+        const distance = req.query.distance;
         
 
-        let get = await EventServices.getFilter(level,sdate);
+        let get = await EventServices.getFilter(level,sdate,distance);
 
         res.json({status:true,success:get});
     } catch (error) {

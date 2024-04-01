@@ -45,6 +45,15 @@ const userControlSchema = new Schema({
             "type": "string",
         } 
     },
+    placename:{
+        type: String,
+    },
+    latitude:{
+        type: Number
+    },
+    longitude:{
+        type: Number
+    },
     }
 );
 

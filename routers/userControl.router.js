@@ -11,5 +11,6 @@ router.delete('/unRequestEvent',UserControlController.unRequest);
 
 router.post('/joinEvent',UserControlController.joinEvent);
 router.delete('/unJoinEvent',UserControlController.unJoinEvent);
+router.put('/saveLocation',UserControlController.saveLocation);
 
 module.exports = router;

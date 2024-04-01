@@ -96,10 +96,26 @@ class EventServices{
     }
 
 
-    static async getFilter(level,sdate){
+    static async getFilter(level,sdate,distance){
         try{
-           
-            return await EventModel.find({level:level,eventdate_start:sdate});
+            let query = {}
+            if(level != undefined){
+                query.level = level
+            }
+            if(sdate != ''){
+                query.
+                eventdate_start = sdate
+            }
+            // if(distance != ""){
+            //     query.
+            //     eventdate_start = sdate
+            // }
+            if(distance != ''){
+                console.log(distance);
+            }
+            
+            console.log(query);
+            return await EventModel.find(query);
         }catch(error){
             res.json({status:false,success:'Error'})
         }

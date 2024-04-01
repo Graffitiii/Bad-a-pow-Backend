@@ -4,9 +4,9 @@ const ClubModel = require('../model/club.model');
 const EventModel = require('../model/event.model')
 
 class UserControlServices {
-    static async createUserControl(userName, ownerPermission, adminOf, ownerOf, follow, pending, join) {
+    static async createUserControl(userName, ownerPermission, adminOf, ownerOf, follow, pending, join, placename, latitude, longitude) {
 
-        const createUserControl = new UserControlModel({ userName, ownerPermission, adminOf, ownerOf, follow, pending, join });
+        const createUserControl = new UserControlModel({ userName, ownerPermission, adminOf, ownerOf, follow, pending, join, placename, latitude, longitude });
         return await createUserControl.save();
     }
 
@@ -60,12 +60,12 @@ class UserControlServices {
         // return await registerOwner;
     }
 
-    static async getUserControl(userName){
+    static async getUserControl(userName) {
         try {
-            const userControl = UserControlModel.findOne({userName: userName})
+            const userControl = UserControlModel.findOne({ userName: userName })
             return await userControl;
         } catch (error) {
-            
+
         }
     }
 
@@ -144,6 +144,16 @@ class UserControlServices {
     static async getStatusId(userName) {
         const getStatusId = UserControlModel.findOne({ userName: userName });
         return await getStatusId;
+    }
+
+    static async saveLocation(userName, placename, latitude, longitude) {
+        try {
+           
+            await UserControlModel.updateOne({ userName: userName }, 
+                { $set: { placename: placename, latitude: latitude, longitude: longitude } });
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

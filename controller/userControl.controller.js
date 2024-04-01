@@ -2,9 +2,9 @@ const UserControlServices = require('../services/userControl.services');
 
 exports.createUserControl = async (req,res,next)=>{
     try {
-        const {userName,ownerPermission,adminOf,ownerOf,follow,pending,join} = req.body;
+        const {userName,ownerPermission,adminOf,ownerOf,follow,pending,join,placename,latitude,longitude} = req.body;
 
-        let userControl = await UserControlServices.createUserControl(userName,ownerPermission,adminOf,ownerOf,follow,pending,join);
+        let userControl = await UserControlServices.createUserControl(userName,ownerPermission,adminOf,ownerOf,follow,pending,join,placename,latitude,longitude);
 
         res.json({status:true,success:userControl});
     } catch (error) {
@@ -107,6 +107,18 @@ exports.unJoinEvent = async (req,res,next)=>{
     } catch (error) {
         throw error;
         // res.json({status:false,success:'Error'})
+    }
+}
+
+exports.saveLocation = async (req,res,next)=>{
+    try {
+        const {userName,placename, latitude, longitude} = req.body;
+
+        let userControl = await UserControlServices.saveLocation(userName,placename, latitude, longitude);
+        res.json({status:true,success:userControl});
+    } catch (error) {
+        throw error;
+        
     }
 }
 
