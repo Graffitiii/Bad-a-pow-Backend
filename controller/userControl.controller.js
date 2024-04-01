@@ -118,7 +118,29 @@ exports.saveLocation = async (req,res,next)=>{
         res.json({status:true,success:userControl});
     } catch (error) {
         throw error;
-        
+    }
+}        
+exports.assingAdmin = async (req,res,next)=>{
+    try {
+        const {userName,clubId} = req.body;
+
+        let userControl = await UserControlServices.assingAdmin(userName,clubId);
+        res.json({status:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
+    }
+}
+
+exports.unAssingAdmin = async (req,res,next)=>{
+    try {
+        const {userName,clubId} = req.body;
+
+        let userControl = await UserControlServices.unAssingAdmin(userName,clubId);
+        res.json({delete:true,success:userControl});
+    } catch (error) {
+        throw error;
+        // res.json({status:false,success:'Error'})
     }
 }
 

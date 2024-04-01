@@ -13,4 +13,8 @@ router.post('/joinEvent',UserControlController.joinEvent);
 router.delete('/unJoinEvent',UserControlController.unJoinEvent);
 router.put('/saveLocation',UserControlController.saveLocation);
 
+router.post('/assingAdmin',UserControlController.assingAdmin);
+router.delete('/unAssingAdmin',UserControlController.unAssingAdmin);
+
+
 module.exports = router;

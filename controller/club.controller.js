@@ -66,10 +66,13 @@ exports.getOwnerClubList = async (req,res,next)=>{
         let get = await UserControlServices.getUserControl(userName);
 
         let ownerIdList = get.ownerOf
+        let adminIdList = get.adminOf
 
-        let result = await ClubServices.getClubById(ownerIdList);
+        let ownerresult = await ClubServices.getClubById(ownerIdList);
+        let adminresult = await ClubServices.getClubById(adminIdList);
 
-        res.json({status:true,data:result});
+        res.json({status:true,Owner:ownerresult,Admin:adminresult});
+        
     } catch (error) {
         
     }
