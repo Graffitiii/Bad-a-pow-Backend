@@ -12,4 +12,8 @@ router.delete('/unRequestEvent',UserControlController.unRequest);
 router.post('/joinEvent',UserControlController.joinEvent);
 router.delete('/unJoinEvent',UserControlController.unJoinEvent);
 
+router.post('/assingAdmin',UserControlController.assingAdmin);
+router.delete('/unAssingAdmin',UserControlController.unAssingAdmin);
+
+
 module.exports = router;

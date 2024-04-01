@@ -145,6 +145,42 @@ class UserControlServices {
         const getStatusId = UserControlModel.findOne({ userName: userName });
         return await getStatusId;
     }
+
+    static async assingAdmin(userName, clubId) {
+        try {
+            await UserControlModel.updateOne(
+                { userName: userName },
+                { $addToSet: { adminOf: clubId } }
+            )
+
+            await ClubModel.updateOne(
+                { _id: clubId },
+                { $addToSet: { admin: userName } }
+            )
+        }
+        catch (error) {
+            throw error;
+        }
+
+    }
+
+    static async unAssingAdmin(userName, clubId) {
+        try {
+            await UserControlModel.updateOne(
+                { userName: userName },
+                { $pull: { adminOf: clubId } }
+            )
+
+            await ClubModel.updateOne(
+                { _id: clubId },
+                { $pull: { admin: userName } }
+            )
+        }
+        catch (error) {
+            throw error;
+        }
+
+    }
 }
 
 module.exports = UserControlServices;
