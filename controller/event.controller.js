@@ -33,33 +33,6 @@ exports.getEventList = async (req,res,next)=>{
 
 }
 
-exports.putEventList = async (req, res, next) => {
-    try {
-        const { image, club, contact, eventdate, level, brand, price_badminton, priceplay, details } = req.body;
-        const eventId = req.params.id; // ดึง _id จากพารามิเตอร์ของ request
-
-        // เรียกใช้ฟังก์ชัน putEvent โดยส่ง _id และข้อมูลที่ต้องการอัปเดตเข้าไป
-        let updatedEvent = await EventServices.putEvent(eventId, { 
-            image, 
-            club, 
-            contact, 
-            eventdate, 
-            level, 
-            brand, 
-            price_badminton, 
-            priceplay, 
-            details 
-        });
-
-        // ส่งค่ากลับไปในรูปแบบ JSON
-        res.json({ status: true, eventlistdata: updatedEvent });
-    } catch (error) {
-        // ถ้าเกิด error ให้ส่ง response กลับไปพร้อมกับ status false และข้อความ error
-        res.status(500).json({ status: false, error: error.message });
-    }
-}
-
-
 exports.deleteEvent = async (req, res, next) => {
     try {
         const { _id } = req.body;

@@ -1,6 +1,7 @@
 const { json } = require('body-parser');
 const EventModel = require('../model/event.model');
 const ClubModel = require('../model/club.model');
+const UserControlModel = require('../model/userControl.model');
 
 class EventServices {
     static async createEvent(image, club, contact, eventdate_start, eventdate_end, level, brand, price_badminton, priceplay, details, active, pending, join, placename, latitude, longitude, userlimit) {
@@ -30,43 +31,38 @@ class EventServices {
 
     }
 
-    static async putEvent(id, newData) {
-        try {
-            // สร้างตัวแปรที่เก็บข้อมูลที่ต้องการอัปเดต
-            const updateData = {
-                image: newData.image,
-                club: newData.club,
-                contact: newData.contact,
-                eventdate: newData.eventdate,
-                level: newData.level,
-                brand: newData.brand,
-                price_badminton: newData.price_badminton,
-                priceplay: newData.priceplay,
-                details: newData.details
-            };
 
-            // ทำการอัปเดตข้อมูลโดยใช้ _id เดิม
-            const updatedEvent = await EventModel.findOneAndUpdate(
-                { _id: id },
-                updateData,
-                { new: true } // เพื่อให้คืนค่าเหตุการณ์ที่ถูกอัปเดตกลับมา
+    static async deleteEvent(id) {
+        try {
+            // Find and delete the event with the given ID
+            const deletedEvent = await EventModel.findOneAndDelete({ _id: id });
+    
+            if (!deletedEvent) {
+                throw new Error('Event not found');
+            }
+    
+            // Delete corresponding userControllerModel entries
+            await UserControlModel.updateMany(
+                { $or: [{ pending: id }, { join: id }] },
+                { $pull: { pending: id, join: id } }
             );
 
-            return updatedEvent;
+            await ClubModel.updateMany(
+                { $or: [{ event_id: id }] },
+                { $pull: { event_id: id} }
+            );
+    
+            console.log(`Event with ID ${id} deleted successfully`);
+            return deletedEvent;
         } catch (error) {
+            console.error(`Error deleting event: ${error.message}`);
             throw error;
         }
     }
 
-    static async deleteEvent(id) {
-        const deleted = await EventModel.findOneAndDelete({ _id: id });
-        console.log(id);
-        return deleted;
-    }
-
-    static async getOwnEventList(ownIdList) {
-        try {
-            return await EventModel.find({
+    static async getOwnEventList(ownIdList){
+        try{
+            return await EventModel.find({ 
                 _id: {
                     $in: ownIdList
                 }
