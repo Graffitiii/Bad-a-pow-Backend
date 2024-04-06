@@ -77,3 +77,15 @@ exports.getOwnerClubList = async (req,res,next)=>{
         
     }
 }
+
+exports.deleteClub = async (req, res, next) => {
+    try {
+        const { _id,clubname } = req.body;
+
+        let deleted = await ClubServices.deleteClub(_id,clubname);
+
+        res.json({ status: true, deleted: deleted });
+    } catch (error) {
+        throw error; // ใช้ throw error แทนที่จะใช้ throw err
+    }
+}

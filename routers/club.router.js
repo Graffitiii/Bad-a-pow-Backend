@@ -8,4 +8,6 @@ router.get('/getClubList',ClubController.getClubList);
 router.get('/getFollowClub',ClubController.getFollowClub)
 router.get('/getOwnerClub',ClubController.getOwnerClubList);
 
+router.delete('/deleteClub',ClubController.deleteClub);
+
 module.exports = router;
