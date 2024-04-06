@@ -113,11 +113,12 @@ exports.getFilter = async (req,res,next)=>{
         const level = req.query.level;
         const sdate = req.query.eventdate_start;
         const distance = req.query.distance;
-        
+        const latitude = req.query.latitude;
+        const longitude = req.query.longitude;
+        const club = req.query.club;
+        let get = await EventServices.getFilter(level,sdate,distance,latitude,longitude,club);
 
-        let get = await EventServices.getFilter(level,sdate,distance);
-
-        res.json({status:true,success:get});
+        res.json({status:true,data:get.result,distance:get.distance});
     } catch (error) {
         
         res.json({status:false,success:'Error'})
