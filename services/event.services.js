@@ -91,7 +91,7 @@ class EventServices {
         }
     }
 
-    static async getFilter(level, sdate, distance, latitude, longitude, club) {
+    static async getFilter(level, sdate, stime,distance, latitude, longitude, club) {
 
         async function getDistanceBetweenPoints(latitude1, longitude1, latitude2, longitude2) {
 
@@ -111,10 +111,32 @@ class EventServices {
             if (level != undefined) {
                 defaultQuery.level = {$all : level};
             }
-            if (sdate != '') {
+            console.log('gsss: ' + sdate);
+            // const filteredDates = eventdate_start.filter(date => date.startsWith(sdate));
+            
+            if (sdate != '' && stime == '') {
+                const currentDate = new Date(sdate);
+                currentDate.setDate(currentDate.getDate() + 1);
+                const nextDate = currentDate.toISOString().split('T')[0];
                 defaultQuery.
-                    eventdate_start = sdate;
+                    eventdate_start = {$gte : new Date(sdate),$lt : new Date(nextDate)};
+                    // console.log(defaultQuery.
+                    //     eventdate_start);
             }
+
+
+            if (sdate != '' && stime != '') {
+                const currentDate = new Date(sdate + 'T' + stime);
+                console.log('cscsc'+ currentDate);
+                
+                defaultQuery.
+                eventdate_start = currentDate;
+                    // console.log(defaultQuery.
+                    //     eventdate_start);
+            }
+            
+            // console.log('stime: ' + stime);
+            
             if (club != '') {
                 defaultQuery.
                     club =  {$regex : club};
@@ -128,8 +150,8 @@ class EventServices {
 
             console.log('defaultQuery');
             console.log(defaultQuery);
-            console.log('distanceQuery');
-            console.log(distanceQuery);
+            // console.log('distanceQuery');
+            // console.log(distanceQuery);
             
 
             const result = await EventModel.find(defaultQuery);
@@ -146,7 +168,7 @@ class EventServices {
                 }
             }
 
-            console.log(distanceIdList);
+            // console.log(distanceIdList);
 
             const distanceResult = await EventModel.find({ 
                 _id: {
