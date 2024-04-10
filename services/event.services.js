@@ -125,6 +125,9 @@ class EventServices {
             if (distance != '') {
                 distanceQuery.distance = parseInt(distance);
             }
+            
+            // defaultQuery.
+            //         eventdate_start = {$gte : new Date("2024-03-5"),$lt : new Date("2024-03-6")};
 
             console.log('defaultQuery');
             console.log(defaultQuery);
@@ -180,10 +183,9 @@ class EventServices {
         }
     }
 
-    static async editEvent(image, club, contact, eventdate_start, eventdate_end, level, brand, price_badminton, priceplay, details) {
+    static async editEvent(image, id, contact, eventdate_start, eventdate_end, level, brand, price_badminton, priceplay, details,userlimit) {
         try {
-            // console.log(userName , picture,gender,level,about,ageShow);
-            return await EventModel.findOneAndUpdate({ club: club }, { $set: { image: image, contact: contact, eventdate_start: eventdate_start, eventdate_end: eventdate_end, level: level, brand: brand, price_badminton: price_badminton, priceplay: priceplay, details: details } })
+            return await EventModel.findOneAndUpdate({ _id: id }, { $set: { image: image, contact: contact, eventdate_start: eventdate_start, eventdate_end: eventdate_end, level: level, brand: brand, price_badminton: price_badminton, priceplay: priceplay, details: details, userlimit: userlimit } })
         } catch (error) {
             throw error;
         }

@@ -134,9 +134,9 @@ exports.getJoinEvent = async (req,res,next)=>{
 
 exports.editEvent = async(req,res,next)=>{
     try {
-        const {image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details} = req.body;
-
-        let result =  await EventServices.editEvent(image,club,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details);
+        const {image,id,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,userlimit} = req.body;
+        console.log(req.body);
+        let result =  await EventServices.editEvent(image,id,contact,eventdate_start,eventdate_end,level,brand,price_badminton,priceplay,details,userlimit);
 
         res.json({status:true,data:result});
     } catch (error) {
