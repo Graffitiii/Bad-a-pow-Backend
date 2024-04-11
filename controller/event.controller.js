@@ -45,6 +45,18 @@ exports.deleteEvent = async (req, res, next) => {
     }
 }
 
+exports.cancelEvent = async (req, res, next) => {
+    try {
+        const { _id } = req.body;
+
+        let deleted = await EventServices.cancelEvent(_id);
+
+        res.json({ status: true, eventlistdata: deleted });
+    } catch (error) {
+        throw error; // ใช้ throw error แทนที่จะใช้ throw err
+    }
+}
+
 exports.getOwnEventList = async (req,res,next)=>{
     try {
         const ownIdList = req.query.ownIdList;
