@@ -60,6 +60,33 @@ class EventServices {
         }
     }
 
+    static async cancelEvent(id) {
+        try {
+            const cancelEvent = await EventModel.find({ _id: id });
+    
+            if (!cancelEvent) {
+                throw new Error('Event not found');
+            }
+
+            await EventModel.updateMany(
+                { _id: id },
+                { $set: { join: [] , pending: []} } // กำหนดค่าของฟิลด์ "join" เป็นรายการว่าง
+            );
+    
+            await UserControlModel.updateMany(
+                { $or: [{ pending: id }, { join: id }] },
+                { $pull: { pending: id, join: id } }
+            );
+
+    
+            console.log(`cancelEvent ${id}`);
+            return cancelEvent;
+        } catch (error) {
+            console.error(`Error deleting event: ${error.message}`);
+            throw error;
+        }
+    }
+
     static async getOwnEventList(ownIdList){
         try{
             return await EventModel.find({ 

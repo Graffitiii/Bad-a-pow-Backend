@@ -21,5 +21,8 @@ router.get('/getJoinEvent',EventController.getJoinEvent);
 router.put('/editEvent',EventController.editEvent);
 
 
+router.delete('/cancelEvent',EventController.cancelEvent);
+
+
 
 module.exports = router;
