@@ -75,6 +75,31 @@ exports.editProfile = async(req,res,next)=>{
 
         res.json({status:true,data:result});
     } catch (error) {
-        
+        throw error;
+    }
+}
+
+exports.checkUser = async(req,res,next)=>{
+    try {
+        const {phonenumber} = req.body;
+        const user = await UserService.checkUser(phonenumber);
+        if(!user){
+            throw new Error('User dont exist');
+        }
+            res.json({status:true,success:"User exist"});
+    } catch (error) {
+        if(error.message == 'User dont exist'){
+            res.status(401).json({status:false,error:"User dont exist"})
+        }
+    }
+}
+
+exports.resetPassword = async(req,res,next)=>{
+    try {
+        const {phonenumber,password} = req.body;
+        await UserService.resetPassword(phonenumber,password);
+        res.json({status:true,succes:"Password changed successfully"});
+    } catch (error) {
+        throw error;
     }
 }
