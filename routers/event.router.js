@@ -9,7 +9,7 @@ router.delete('/deleteEvent',EventController.deleteEvent);
 
 router.get('/getOwnEvent',EventController.getOwnEventList);
 
-router.put('/putEventStatus',EventController.putEventStatus);
+router.put('/startEvent',EventController.startEvent);
 
 router.get('/getEventDetail',EventController.getEventDetail);
 

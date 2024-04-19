@@ -69,10 +69,10 @@ exports.getOwnEventList = async (req,res,next)=>{
     }
 }
 
-exports.putEventStatus = async (req,res,next)=>{
+exports.startEvent = async (req,res,next)=>{
     try {
-        const { eventId,status } = req.body;
-        let result =  await EventServices.putEventStatus(eventId,status);
+        const { eventId, event_start } = req.body;
+        let result =  await EventServices.startEvent(eventId,event_start);
         
         res.json({edit:true,data:result});
     } catch (error) {
@@ -102,7 +102,8 @@ exports.getFilter = async (req,res,next)=>{
         const latitude = req.query.latitude;
         const longitude = req.query.longitude;
         const club = req.query.club;
-        let get = await EventServices.getFilter(level,sdate,stime,distance,latitude,longitude,club);
+        const status = req.query.status;
+        let get = await EventServices.getFilter(level,sdate,stime,distance,latitude,longitude,club,status);
 
         res.json({status:true,data:get.result,distance:get.distance});
     } catch (error) {
