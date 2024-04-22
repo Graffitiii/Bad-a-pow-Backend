@@ -2,9 +2,9 @@ const { json } = require('body-parser');
 const ReviewModel = require('../model/review.model');
 
 class ReviewServices{
-    static async createReview(score,comment,showuser,userName,clubname){
+    static async createReview(score,comment,showuser,userName,clubname,create_at){
 
-        const createReview = new ReviewModel({score,comment,showuser,userName,clubname});
+        const createReview = new ReviewModel({score,comment,showuser,userName,clubname,create_at});
         
         return await createReview.save();
     }

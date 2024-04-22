@@ -2,9 +2,9 @@ const ReviewServices = require('../services/review.services');
 
 exports.createReview = async (req,res,next)=>{
     try {
-        const {score,comment,showuser,userName,clubname} = req.body;
+        const {score,comment,showuser,userName,clubname,create_at} = req.body;
 
-        let create = await ReviewServices.createReview(score,comment,showuser,userName,clubname);
+        let create = await ReviewServices.createReview(score,comment,showuser,userName,clubname,create_at);
 
         res.json({status:true,success:create});
 
