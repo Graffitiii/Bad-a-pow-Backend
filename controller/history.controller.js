@@ -18,8 +18,9 @@ exports.createHistory = async (req,res,next)=>{
 exports.findHistory = async (req,res,next)=>{
     try {
         const username = req.query.username;
+        const limit = req.query.limit;
 
-        let result = await HistoryServices.findHistory(username);
+        let result = await HistoryServices.findHistory(username,limit);
 
         res.json({status:true,result:result});
 

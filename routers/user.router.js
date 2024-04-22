@@ -7,4 +7,5 @@ router.get('/getUser',UserController.getUser);
 router.put('/editProfile',UserController.editProfile);
 router.post('/checkUser',UserController.checkUser);
 router.put('/resetPassword',UserController.resetPassword);
+router.get('/getUserImage',UserController.getUserImage);
 module.exports = router;

@@ -67,6 +67,18 @@ exports.getUser = async(req,res,next)=>{
     }
 }
 
+exports.getUserImage = async(req,res,next)=>{
+    try {
+        const userName = req.query.userName;
+
+        let result =  await UserService.getUser(userName);
+        
+        res.json({status:true,data:result.picture});
+    } catch (error) {
+        throw error;
+    }
+}
+
 exports.editProfile = async(req,res,next)=>{
     try {
         const {userName,picture,gender,level,about,ageShow} = req.body;

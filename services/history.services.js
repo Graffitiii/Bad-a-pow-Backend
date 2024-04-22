@@ -8,9 +8,16 @@ class HistoryServices{
         return await createHistory.save();
     }
 
-    static async findHistory(username){
-
-        const result = HistoryModel.find({ join: username } );
+    static async findHistory(username,limit){
+        console.log(limit);
+        let result;
+        if(limit != undefined){
+            result = HistoryModel.find({ join: username }).limit(Number(limit));
+        }
+        else{
+            result = HistoryModel.find({ join: username });
+        }
+        
         
         return result;
     }
