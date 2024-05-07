@@ -7,7 +7,10 @@ const ClubRouter = require('./routers/club.router');
 const ReviewRouter = require('./routers/review.router');
 const HistoryRouter = require('./routers/history.router');
 const app = express();
+var cors = require('cors')
 
+
+app.use(cors());
 app.use(body_parser.json());
 
 app.use('/',userRouter);
